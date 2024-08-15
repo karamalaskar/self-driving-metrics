@@ -11,8 +11,10 @@ class App:
         self.db_manager = DatabaseManager('self_driving_tests.db')
         self.db_manager.create_table()
 
-        self.sample_data = SampleDataGenerator.generate_sample_data(100)
-        self.db_manager.insert_data(self.sample_data)
+      # Check if the database is empty before inserting sample data
+        if not self.db_manager.has_data():
+            self.sample_data = SampleDataGenerator.generate_sample_data(100)
+            self.db_manager.insert_data(self.sample_data)
 
         self.data = self.db_manager.load_data()
         self.data_processor = DataProcessor(self.data)

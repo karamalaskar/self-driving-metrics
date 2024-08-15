@@ -5,6 +5,12 @@ class DatabaseManager:
     def __init__(self, db_name):
         self.db_name = db_name
 
+    def has_data(self):
+        cursor = self.connect().cursor()
+        cursor.execute("SELECT COUNT(*) FROM test_data")
+        count = cursor.fetchone()[0]
+        return count > 0
+
     def connect(self):
         return sqlite3.connect(self.db_name)
 
