@@ -56,6 +56,10 @@ class App:
 
         # Filter data based on sidebar inputs
         filtered_data = self.data_processor.filter_data(date_range, vehicle_id, result)
+        
+        # Update data in components
+        self.visualizer.data = filtered_data
+        self.metric_calculator.data = filtered_data
 
         # Display filtered data
         st.subheader("Filtered Test Data")
