@@ -71,17 +71,21 @@ class App:
 
         # Display filtered data
         with st.expander("Filtered Test Data", expanded=False):
-            st.dataframe(filtered_data, use_container_width=True, hide_index=True, height=500)
+            st.dataframe(filtered_data, use_container_width=True, hide_index=True)
 
         # Display metrics with icons and customized colors
-        st.subheader(" Performance Metrics")
+        st.subheader("Performance Metrics")
         metrics = self.metric_calculator.calculate_metrics()
         col1, col2, col3 = st.columns(3)
+        
         col1.metric("Avg Speed", f"{metrics['average_speed']:.2f} km/h", delta_color="inverse")
+        col1.metric("Avg Human Inputs", f"{metrics['average_human_inputs']:.0f}")
+        
         col2.metric("Avg Following Distance", f"{metrics['average_distance']:.2f} s")
+        col2.metric("Avg Distance Travelled", f"{metrics['average_distance_travelled']:.2f} km")
+        
         col3.metric("Avg Lane-Keeping Score", f"{metrics['average_lane_keeping_accuracy']:.2f} %")
-        col1.metric("Avg Distance Travelled", f"{metrics['average_distance_travelled']:.2f} km")
-        col2.metric("Most Common Result", metrics['common_result'])
+        col3.metric("Most Common Result", metrics['common_result'])
 
         # Visualizations with transitions
         st.subheader("Test Result Distribution")
