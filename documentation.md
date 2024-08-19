@@ -10,8 +10,8 @@ Welcome to the **Self-Driving Vehicle Test Metrics Dashboard**. This demo is des
     - Create various charts, such as bar charts, pie charts, and line charts, to visualize the distribution of test results, trends over time, and correlations between metrics.
 
 ### How to Use
-1. **Home Page**:
-    - The home page provides an overview of the dashboard and displays the primary data and metrics. Here, users can see filtered test data, performance metrics, and visualizations based on their selections.
+1. **Dashboard Page**:
+    - The dashboard provides an overview of the primary data and metrics. Here, users can see filtered test data, performance metrics, and visualizations based on their selections.
 
 2. **Filters**:
     - Utilize the sidebar to apply filters to the data:
