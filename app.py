@@ -65,6 +65,10 @@ class App:
         # Filter data based on sidebar inputs
         filtered_data = self.data_processor.filter_data(date_range, vehicle_id, result)
         
+        if filtered_data.empty:
+            st.warning("No data found for the selected filters.")
+            return
+        
         # Update data in components
         self.visualizer.data = filtered_data
         self.metric_calculator.data = filtered_data
