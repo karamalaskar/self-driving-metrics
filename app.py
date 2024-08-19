@@ -11,7 +11,7 @@ class App:
         self.db_manager = DatabaseManager('self_driving_tests.db')
         self.db_manager.create_table()
 
-      # Check if the database is empty before inserting sample data
+        # Check if the database is empty before inserting sample data
         if not self.db_manager.has_data():
             self.sample_data = SampleDataGenerator.generate_sample_data(100)
             self.db_manager.insert_data(self.sample_data)
@@ -45,8 +45,16 @@ class App:
     def display_home(self):
         # Sidebar for filters
         st.sidebar.header("Filters")
-        date_range = st.sidebar.date_input("Select date range", 
-                                            [self.data['test_date'].min(), self.data['test_date'].max()])
+        date_range = st.sidebar.date_input(
+            "Select date range", 
+            [self.data['test_date'].min(), self.data['test_date'].max()],
+            min_value=SampleDataGenerator.START_DATE,
+            max_value=SampleDataGenerator.END_DATE
+        )
+
+        if len(date_range) != 2:
+            st.sidebar.warning("Please select both start and end dates.")
+            return
 
         vehicle_options = ["All"] + sorted(self.data['vehicle_id'].unique())
         vehicle_id = st.sidebar.selectbox("Select vehicle ID", vehicle_options)

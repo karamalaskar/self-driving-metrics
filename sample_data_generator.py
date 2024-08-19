@@ -12,6 +12,8 @@ class SampleDataGenerator:
     MIN_ACCURACY = 50
     MAX_HUMAN_INPUTS = 30
     MIN_HUMAN_INPUTS = 0
+    START_DATE = datetime(2024, 1, 1)
+    END_DATE = datetime(2024, 8, 30)
 
     @staticmethod
     def determine_result(following_distance, lane_keeping_accuracy, human_inputs, thresholds):
@@ -30,16 +32,14 @@ class SampleDataGenerator:
     def generate_sample_data(num_records):
         #Generate a list of sample data records
         sample_data = []
-        start_date = datetime(2024, 1, 1)
-        end_date = datetime(2024, 8, 30)
-        delta_days = (end_date - start_date).days
+        delta_days = (SampleDataGenerator.END_DATE - SampleDataGenerator.START_DATE).days
 
         for _ in range(num_records):
             random_days = random.randint(0, delta_days)
-            test_date = start_date + timedelta(days=random_days)
+            test_date = SampleDataGenerator.START_DATE + timedelta(days=random_days)
             test_date_str = test_date.strftime('%Y-%m-%d')
 
-            days_since_start = (test_date - start_date).days
+            days_since_start = (test_date - SampleDataGenerator.START_DATE).days
             total_days = delta_days
 
             vehicle_id = f'VEHICLE-{random.randint(1, 5)}'
